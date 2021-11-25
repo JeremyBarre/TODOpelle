@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class Navigation extends StatefulWidget {
-  const Navigation({Key? key}) : super(key: key);
+class Affichage extends StatefulWidget {
+  const Affichage({Key? key}) : super(key: key);
 
   @override
-  State<Navigation> createState() => _NavigationState();
+  State<Affichage> createState() => _NavigationState();
 }
 
-/// This is the private State class that goes with Navigation.
-class _NavigationState extends State<Navigation> {
+/// This is the private State class that goes with Affichage.
+class _NavigationState extends State<Affichage> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
