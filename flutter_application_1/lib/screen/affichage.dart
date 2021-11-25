@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screen/list.dart';
 
 class Affichage extends StatefulWidget {
   const Affichage({Key? key}) : super(key: key);
@@ -33,6 +34,31 @@ class _NavigationState extends State<Affichage> {
     });
   }
 
+  void _modal(BuildContext context) => showModalBottomSheet(
+      context: context,
+      builder: (context) => SizedBox(
+            height: 200,
+            child: Card(
+              child: Column(children: const [
+                TextField(
+                    decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Tâche',
+                )),
+                TextField(
+                    decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Description',
+                )),
+                TextField(
+                    decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Date',
+                )),
+              ]),
+            ),
+          ));
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +72,7 @@ class _NavigationState extends State<Affichage> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.checklist),
             label: 'A complétés',
@@ -67,9 +93,11 @@ class _NavigationState extends State<Affichage> {
         selectedItemColor: Colors.white,
         backgroundColor: Colors.blue[600],
         onTap: _onItemTapped,
+        //onTap: (values) => Navigator.push(
+        //    context, MaterialPageRoute(builder: (context) => Liste()))
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () => _modal(context),
         icon: const Icon(Icons.add_circle),
         label: const Text("Tâche"),
       ),
