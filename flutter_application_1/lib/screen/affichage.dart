@@ -17,6 +17,14 @@ class _NavigationState extends State<Affichage> {
       'Index 0: A complétés',
       style: optionStyle,
     ),
+    Text(
+      'Index 1: Busness',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 2: School',
+      style: optionStyle,
+    ),
   ];
 
   void _onItemTapped(int index) {
@@ -34,8 +42,11 @@ class _NavigationState extends State<Affichage> {
           child: Text("Liste à effectuer"),
         ),
       ),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.checklist),
             label: 'A complétés',
@@ -56,6 +67,11 @@ class _NavigationState extends State<Affichage> {
         selectedItemColor: Colors.white,
         backgroundColor: Colors.blue[600],
         onTap: _onItemTapped,
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        icon: const Icon(Icons.add_circle),
+        label: const Text("Tâche"),
       ),
     );
   }
