@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
 
-class List extends StatelessWidget {
-  const List({Key? key}) : super(key: key);
+class Navigation extends StatefulWidget {
+  const Navigation({Key? key}) : super(key: key);
+
+  @override
+  State<Navigation> createState() => _NavigationState();
+}
+
+/// This is the private State class that goes with Navigation.
+class _NavigationState extends State<Navigation> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,38 +26,20 @@ class List extends StatelessWidget {
           child: Text("Liste à effectuer"),
         ),
       ),
-      body: SizedBox(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          //crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  width: 50,
-                  height: 50,
-                  color: Colors.purple,
-                ),
-                Container(
-                  width: 50,
-                  height: 50,
-                  color: Colors.red,
-                ),
-                Container(
-                  width: 50,
-                  height: 50,
-                  color: Colors.green,
-                ),
-                Container(
-                  width: 50,
-                  height: 50,
-                  color: Colors.pink,
-                ),
-              ],
-            )
-          ],
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.checklist),
+            label: 'A complétés',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.archive),
+            label: 'Archivés',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.purple,
+        onTap: _onItemTapped,
       ),
     );
   }
