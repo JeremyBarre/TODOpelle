@@ -9,7 +9,7 @@ class List extends StatelessWidget {
       appBar: AppBar(
         //titleTextStyle: const TextStyle(fontWeight: FontWeight.bold),
         title: const Center(
-          child: const Text("Liste à effectuer"),
+          child: Text("Liste à effectuer"),
         ),
       ),
       body: SizedBox(
