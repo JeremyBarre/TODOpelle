@@ -10,6 +10,14 @@ class Navigation extends StatefulWidget {
 /// This is the private State class that goes with Navigation.
 class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'Index 0: A complétés',
+      style: optionStyle,
+    ),
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -31,14 +39,22 @@ class _NavigationState extends State<Navigation> {
           BottomNavigationBarItem(
             icon: Icon(Icons.checklist),
             label: 'A complétés',
+            //backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.archive),
             label: 'Archivés',
+            //backgroundColor: Colors.green,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.auto_delete),
+            label: 'Supprimés',
+            //backgroundColor: Colors.red,
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.purple,
+        selectedItemColor: Colors.white,
+        backgroundColor: Colors.blue[600],
         onTap: _onItemTapped,
       ),
     );
