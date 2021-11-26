@@ -1,7 +1,7 @@
-# TODOpelle
+# TODOPelle
 
-Jérémy Barré
+Jérémy Barré<bre>
 Git name: JeremyBarre
 
-Théo Richer
+Théo Richer<br>
 Git name: Tricher
