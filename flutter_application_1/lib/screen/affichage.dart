@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screen/list.dart';
+//import 'package:flutter_application_1/screen/list.dart';
 
 final List<Map<String, dynamic>> list = [
   {"Tache": "lol", "Date": 02 - 11 - 2020, "Description": "ça marche"}
@@ -41,44 +41,54 @@ class _NavigationState extends State<Affichage> {
     });
   }
 
-  void _modal(BuildContext context, Map<String, dynamic> list) =>
+  void _modal(BuildContext context) => showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (context) => Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: SizedBox(
+              height: 300,
+              child: Card(
+                child: Column(children: [
+                  const TextField(
+                      decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Tâche',
+                  )),
+                  const TextField(
+                      decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Description',
+                  )),
+                  const TextField(
+                      decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Date',
+                  )),
+                  ElevatedButton(
+                    onPressed: () => _modal(context),
+                    child: const Text('Save'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _modal(context),
+                    child: const Text('Return'),
+                  ),
+                ]),
+              ),
+            ),
+          ));
+
+  void _modal2(BuildContext context, Map<String, dynamic> list) =>
       showModalBottomSheet(
           isScrollControlled: true,
           context: context,
           builder: (context) => Padding(
-                padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: SizedBox(
-                  height: 300,
-                  child: Card(
-                    child: Column(children: [
-                      const TextField(
-                          decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Tâche',
-                      )),
-                      const TextField(
-                          decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Description',
-                      )),
-                      const TextField(
-                          decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Date',
-                      )),
-                      // ElevatedButton(
-                      //   onPressed: () => _modal(context),
-                      //   child: const Text('Save'),
-                      // ),
-                      // ElevatedButton(
-                      //   onPressed: () => _modal(context),
-                      //   child: const Text('Return'),
-                      // ),
-                    ]),
-                  ),
-                ),
-              ));
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: const SizedBox(
+                height: 300,
+              )));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,16 +100,14 @@ class _NavigationState extends State<Affichage> {
       body: ListView.builder(
           itemCount: list.length,
           itemBuilder: (context, index) {
+            _widgetOptions.elementAt(_selectedIndex);
             return Card(
               child: ListTile(
                 title: Text(list[index]["Tache"]),
-                onTap: () => _modal(context, list[index]),
+                onTap: () => _modal2(context, list[index]),
               ),
             );
           }),
-      //Center(
-      // child: _widgetOptions.elementAt(_selectedIndex),
-      //),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -123,7 +131,9 @@ class _NavigationState extends State<Affichage> {
         //    context, MaterialPageRoute(builder: (context) => Liste()))
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          _modal(context);
+        },
         icon: const Icon(Icons.add_circle),
         label: const Text("Tâche"),
       ),
