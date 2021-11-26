@@ -1,6 +1,6 @@
 # TODOPelle
 
-Jérémy Barré<bre>
+Jérémy Barré<br>
 Git name: JeremyBarre
 
 Théo Richer<br>
