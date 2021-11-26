@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screen/affichage.dart';
 
+// final List<Map<String, dynamic>> list = [
+//   {"Tâche": "lol", "Date": 02 - 11 - 2020, "Description": "ça marche"}
+// ];
 void main() {
   runApp(const App());
 }
@@ -16,7 +19,9 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Affichage(),
+      home: Affichage(
+        task: list,
+      ),
     );
   }
 }

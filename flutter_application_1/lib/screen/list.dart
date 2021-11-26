@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
 
-class Liste extends StatefulWidget {
-  const Liste({Key? key}) : super(key: key);
+class ListTable extends StatefulWidget {
+  final List<Map<String, dynamic>> task;
+
+  const ListTable({
+    Key? key,
+    required this.task,
+  }) : super(key: key);
 
   @override
-  State<Liste> createState() => _Truc();
+  State<ListTable> createState() => _Listing();
 }
 
-class _Truc extends State<Liste> {
-  @override
+void _modal(BuildContext context, Map<String, dynamic> task) =>
+    showModalBottomSheet(
+        context: context,
+        builder: (context) => const SizedBox(
+              height: 200,
+            ));
+
+class _Listing extends State<ListTable> {
+  
+
+@override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        //titleTextStyle: const TextStyle(fontWeight: FontWeight.bold),
-        title: const Center(
-          child: Text("Liste à effectuer"),
-        ),
-      ),
-    );
+   return Container(
+     height: 50,
+   );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      ListTable.add((task) => null) = index;
+    });
   }
 }

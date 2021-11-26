@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screen/list.dart';
 
+final List<Map<String, dynamic>> list = [
+  {"Tache": "lol", "Date": 02 - 11 - 2020, "Description": "ça marche"}
+];
+
 class Affichage extends StatefulWidget {
-  const Affichage({Key? key}) : super(key: key);
+  final List<Map<String, dynamic>> task;
+  const Affichage({
+    Key? key,
+    required this.task,
+  }) : super(key: key);
 
   @override
   State<Affichage> createState() => _NavigationState();
 }
 
-/// This is the private State class that goes with Affichage.
 class _NavigationState extends State<Affichage> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
@@ -34,59 +41,78 @@ class _NavigationState extends State<Affichage> {
     });
   }
 
-  void _modal(BuildContext context) => showModalBottomSheet(
-      context: context,
-      builder: (context) => SizedBox(
-            height: 200,
-            child: Card(
-              child: Column(children: const [
-                TextField(
-                    decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Tâche',
-                )),
-                TextField(
-                    decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Description',
-                )),
-                TextField(
-                    decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Date',
-                )),
-              ]),
-            ),
-          ));
-
+  void _modal(BuildContext context, Map<String, dynamic> list) =>
+      showModalBottomSheet(
+          isScrollControlled: true,
+          context: context,
+          builder: (context) => Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: SizedBox(
+                  height: 300,
+                  child: Card(
+                    child: Column(children: [
+                      const TextField(
+                          decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Tâche',
+                      )),
+                      const TextField(
+                          decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Description',
+                      )),
+                      const TextField(
+                          decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Date',
+                      )),
+                      // ElevatedButton(
+                      //   onPressed: () => _modal(context),
+                      //   child: const Text('Save'),
+                      // ),
+                      // ElevatedButton(
+                      //   onPressed: () => _modal(context),
+                      //   child: const Text('Return'),
+                      // ),
+                    ]),
+                  ),
+                ),
+              ));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //titleTextStyle: const TextStyle(fontWeight: FontWeight.bold),
         title: const Center(
           child: Text("Liste à effectuer"),
         ),
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: ListView.builder(
+          itemCount: list.length,
+          itemBuilder: (context, index) {
+            return Card(
+              child: ListTile(
+                title: Text(list[index]["Tache"]),
+                onTap: () => _modal(context, list[index]),
+              ),
+            );
+          }),
+      //Center(
+      // child: _widgetOptions.elementAt(_selectedIndex),
+      //),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.checklist),
             label: 'A complétés',
-            //backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.archive),
             label: 'Archivés',
-            //backgroundColor: Colors.green,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.auto_delete),
             label: 'Supprimés',
-            //backgroundColor: Colors.red,
           ),
         ],
         currentIndex: _selectedIndex,
@@ -97,7 +123,7 @@ class _NavigationState extends State<Affichage> {
         //    context, MaterialPageRoute(builder: (context) => Liste()))
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _modal(context),
+        onPressed: () {},
         icon: const Icon(Icons.add_circle),
         label: const Text("Tâche"),
       ),
